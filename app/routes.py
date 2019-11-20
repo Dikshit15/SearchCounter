@@ -1,6 +1,10 @@
 from app import app, mongo
+import time
 from utils.text_analysis import get_inverted_index
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
+
+
+
 
 @app.route("/")
 def start_page():
@@ -9,6 +13,7 @@ def start_page():
 @app.route('/index', methods = ['POST'])
 def index():
     content = request.get_json()
+    print("content:", content)
     result = {
         "inverted_index" : {},
         "paragraph_dict" : {}
@@ -35,7 +40,7 @@ def index():
     return {
         "success": True
     }
-     
+
 @app.route("/search", methods = ["GET"])
 def search():
     word = request.args.get("search", default="SOmethign", type=str)
