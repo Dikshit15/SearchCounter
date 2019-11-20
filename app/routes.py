@@ -1,7 +1,10 @@
 from app import app, mongo
 from utils.text_analysis import get_inverted_index
-from flask import request
+from flask import request, render_template
 
+@app.route("/")
+def start_page():
+    return render_template("hello.html")
 
 @app.route('/index', methods = ['POST'])
 def index():
