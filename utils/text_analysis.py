@@ -20,7 +20,7 @@ def tokenize_paragraph(indexed_paragraph,s=None):
         paragraph_dict = {}
         for i in range(0,len(data_list)):
             if len(data_list[i].strip()) is not 0:
-                paragraph_index = get_random_string(indexed_paragraph.keys() + paragraph_dict.keys())
+                paragraph_index = get_random_string(list(indexed_paragraph.keys()) + list(paragraph_dict.keys()))
                 paragraph_dict[paragraph_index] = data_list[i]
         if len(paragraph_dict) > 0:
             result = {
