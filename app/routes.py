@@ -39,18 +39,18 @@ def index():
 @app.route("/search", methods = ["GET"])
 def search():
     word = request.args.get("search", default="SOmethign", type=str)
-    print word
+    print (word)
     cursor = mongo.db.words.find_one({"word" : word})
     if cursor is None:
         return {"complete" : True, "body": []}
     index = cursor["index"]
-    print index
+    print (index)
     index = sorted(index, key = lambda x: x[1])[::-1]
-    print index
+    print (index)
     paragraph_list = []
     for i in range(0, min(10, len(index))):
         paragraph_list.append(mongo.db.paragraphs.find_one({"id" : index[i][0]})["paragraph"])
-    print paragraph_list
+    print (paragraph_list)
     result = {
         "success" : True,
         "body" : paragraph_list
@@ -71,7 +71,7 @@ def get_all_words():
     cursor = mongo.db.words.find({}, { "_id": 0, "index":0})
     words = []
     for i in cursor:
-        print i
+        print (i)
         words.append(i["word"])
     return {
         "success" : True,
